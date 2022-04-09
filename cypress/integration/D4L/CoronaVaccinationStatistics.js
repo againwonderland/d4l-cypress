@@ -102,17 +102,32 @@ describe("Validate Vaccinations statistics for Germany", () => {
         })
     });
 
-   it("Date of information is today (passes when today is a workday)", () => {
-       cy.get('@TimestampVaccinationUpdate').invoke('text').
-       then((text) => {
-           //retrieve current date and format as on the page
-           const formattedDate = dayjs().format('MM/DD/YYYY');
-           expect(text).to.be.contain(formattedDate)
+    it("Date of information is today (passes when today is a workday)", () => {
+       cy.get('@numbers').then( (numbers) => {
+          cy.get('@TimestampVaccinationUpdate').invoke('text').
+          then((text) => text.split(',')).
+          then((dateTime) => dateTime[0]).
+          should('have.length', 10).
+          then((dateOnPage) => {
+              const today = dayjs();
+              expect(dayjs(dateOnPage).isValid(), "date on page should be valid").to.be.true;
+   
+              let upperBound = today.add(1, 'day')
+              let lowerBound = today.subtract(numbers.maxNumHolidaysInaRowDE+1, 'day')
+              // check whether the date on page is today or in the past
+              expect(
+                  dayjs(dateOnPage).isBefore(upperBound), 
+                  "date on page should be today or in the past",
+                ).to.be.true;
+              expect(
+                  dayjs(dateOnPage).isAfter(lowerBound), 
+                  "date on page should be no older than 5 days",
+                ).to.be.true;
+          });
        });
-
    });
 
-    it("Texts are displayed in correct language (test of chosen texts)", () => {
+    it("Selected texts are displayed in correct language", () => {
         cy.get('@coronaStatisticsHeader').invoke('text').should('include', ("Vaccinations statistics for Germany"))
         cy.get('@selectLand').invoke('text').should('include', ("Please select"))
         cy.get('@textSmall').invoke('text').should('include', ("Current vaccines require two shots"))
@@ -123,7 +138,7 @@ describe("Validate Vaccinations statistics for Germany", () => {
         //cy.visit('/en/vaccine/corona-vaccine/');
     });
 
-    it.only("Totals are the same when user switches the language to German", () => {
+    it("Totals are the same when user switches the language to German", () => {
         cy.get('.select__element').select(0);
         cy.get('@totalVaccinations').first().invoke('text').
             then( $txt => $txt.replaceAll(',','')).
@@ -136,9 +151,7 @@ describe("Validate Vaccinations statistics for Germany", () => {
        cy.get('@totalVaccinations').first().invoke('text').
            then( ($txt) => $txt.replaceAll('.','')).
            then(parseInt).
-           then((numberDE) => {
-               cy.get('@totalVaccinationsEN').should('be.eq',numberDE)
-           });       
+           then((numberDE) => cy.get('@totalVaccinationsEN').should('be.eq',numberDE));       
     });
 
     it("When user selects Land, total of vaccinated people gets changed", () => {
