@@ -1,3 +1,5 @@
 {
-    "baseUrl": "https://www.data4life.care"
+    "baseUrl": "https://www.data4life.care",
+    "testFiles":"**/*.js"
+
 }
