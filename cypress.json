@@ -1,6 +1,6 @@
 {
     "baseUrl": "https://www.data4life.care",
     "testFiles":"**/*.js",
-    "chromeWebSecurity": false
-
+    "chromeWebSecurity": false,
+    "video": false
 }
