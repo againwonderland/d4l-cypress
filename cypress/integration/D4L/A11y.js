@@ -1,15 +1,5 @@
 /// <reference types="Cypress" />
 
-// const { parseInt } = require("cypress/types/lodash");
-const dayjs = require('dayjs');
-
-// We scroll by default so that the element to act on is centrally placed.
-// This makes the selection possible, i.e.,
-// the navigation bar at the top does not cover it
-Cypress.config('scrollBehavior', 'center')
-
-
-
 describe("Validate Vaccinations statistics for Germany", () => {
     beforeEach( function () {
         cy.clearCookies();
@@ -38,7 +28,6 @@ describe("Validate Vaccinations statistics for Germany", () => {
 
         cy.task('table', violationData)
       }
-
 
     it("Vaccinations statistics for Germany doesn't have detectable a11y violations on load", () => {
         cy.checkA11y('section:nth-of-type(3) > .grid', {
