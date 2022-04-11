@@ -44,8 +44,8 @@ Out of scope I have left:
 1. [Cypress official documentation](https://docs.cypress.io)
 1. [Axe library for A11y testing](https://www.npmjs.com/package/cypress-axe)
 1. Stackoverflow or other sources
-  * `"chromeWebSecurity": false` to prevent CORS problems when running headless
-  * Population data of Germany and Berlin has been taken from Wikipedia
+    1. `"chromeWebSecurity": false` to prevent CORS problems when running headless
+    1. Population data of Germany and Berlin has been taken from Wikipedia
 
 If particular block of code was copied from the Internet, there is an explicit note about this in the code with reference to the source where it was taken from.
 
