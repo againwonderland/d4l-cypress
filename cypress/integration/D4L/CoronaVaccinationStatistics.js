@@ -1,4 +1,4 @@
-/// <reference types="Cypress" /> 
+/// <reference types="Cypress" />
 
 // dayjs is used for date manipulation and calculations
 const dayjs = require('dayjs');
@@ -8,7 +8,7 @@ const dayjs = require('dayjs');
 // because the element is covered by the menu bar on the top of the view.
 Cypress.config('scrollBehavior', 'center')
 
-describe("Validate vaccinations statistics for Germany.", () => {    
+describe("Validate vaccinations statistics for Germany.", () => {
     beforeEach( function () {
         // fixtures are reset before each test
         cy.fixture('D4L.json').as('numbers');
@@ -62,9 +62,9 @@ describe("Validate vaccinations statistics for Germany.", () => {
                 then(parseInt).
                 should('be.greaterThan', -1).
                 and('be.lessThan', numbers.numberOfPeopleInGermany)
-        });    
+        });
     });
-        
+
     it("Both totals of people vaccinated yesterday are equal.", () => {
         cy.get('[data-corona-number="diff_deutschland_vaccinated"]').as('totalVaccinationsYesterday')
         cy.get('@totalVaccinationsYesterday').then(() => {
@@ -123,7 +123,7 @@ describe("Validate vaccinations statistics for Germany.", () => {
                 then((dateOnPage) => {
                     const today = dayjs();
                     expect(dayjs(dateOnPage).isValid(), "date on page should be valid").to.be.true;
-        
+
                     let upperBound = today.add(1, 'day')
                     // to accommodate running tests on the first workday after the longest public holidays,
                     // we must add +1 to the number maxNumHolidaysInaRowDE.
@@ -132,11 +132,11 @@ describe("Validate vaccinations statistics for Germany.", () => {
                     let lowerBound = today.subtract(numbers.maxNumHolidaysInaRowDE+1, 'day')
                     // check whether the date on page is today or in the past
                     expect(
-                        dayjs(dateOnPage).isBefore(upperBound), 
+                        dayjs(dateOnPage).isBefore(upperBound),
                         "date on page should be today or in the past",
                         ).to.be.true;
                     expect(
-                        dayjs(dateOnPage).isAfter(lowerBound), 
+                        dayjs(dateOnPage).isAfter(lowerBound),
                         "date on page should be no older than 5 days",
                         ).to.be.true;
             });
@@ -147,12 +147,12 @@ describe("Validate vaccinations statistics for Germany.", () => {
         cy.get('.coronaStatistics__info > h2').as('coronaStatisticsHeader')
         cy.get('.select__label').as('selectLand')
         cy.get('.coronaStatistics__text small').as('statisticsTextSmall')
-        
+
         // The English page is visited in beforeEach
         cy.get('@coronaStatisticsHeader').invoke('text').should('include', ("Vaccinations statistics for Germany"))
         cy.get('@selectLand').invoke('text').should('include', ("Please select"))
         cy.get('@statisticsTextSmall').invoke('text').should('include', ("Current vaccines require two shots"))
-        
+
         // Visiting the German page
         cy.visit('/de/impfung/corona-impfung/')
         cy.get('@coronaStatisticsHeader').invoke('text').should('include', ("Impfstatistik für Deutschland"))
@@ -169,11 +169,11 @@ describe("Validate vaccinations statistics for Germany.", () => {
             then( (totalVaccinationsEN) => {
                 cy.visit('/de/impfung/corona-impfung/');
                 cy.get('.select__element').select(0);
-                
+
                 cy.get('@totalVaccinations').first().invoke('text').
                     then( ($txt) => $txt.replaceAll('.','')).
                     then(parseInt).
-                    then((totalVaccinationDE) => expect(totalVaccinationsEN).to.be.eq(totalVaccinationDE));       
+                    then((totalVaccinationDE) => expect(totalVaccinationsEN).to.be.eq(totalVaccinationDE));
             });
     });
 
@@ -185,7 +185,7 @@ describe("Validate vaccinations statistics for Germany.", () => {
                 then( $txt => $txt.replaceAll(',','')).
                 then(parseInt).
                 should('be.greaterThan', -1).
-                and('be.lessThan', numbers.numberOfPeopleInBerlin) 
-        });        
+                and('be.lessThan', numbers.numberOfPeopleInBerlin)
+        });
     });
-}); 
+});

@@ -26,8 +26,8 @@ In the scope of this test suite, I have included:
 3. Accessibility tests of the web page elements.
 4. Consistency check of the data when the user loads the web page in English and German.
 5. Validation whether the date of the last update is up to date.
-6. Validation whether translations in English and German are available for selected texts. 
-7. Validation whether the numbers changed when the user selects another value from the dropdown list. 
+6. Validation whether translations in English and German are available for selected texts.
+7. Validation whether the numbers changed when the user selects another value from the dropdown list.
 
 Out of scope I have left:
 
@@ -37,7 +37,6 @@ Out of scope I have left:
 1. Alignment of graphics and texts (e.g., whether the colorful boxes with numbers are vertically aligned).
 1. Style and grammatical correctness of displayed texts.
 1. Testing for different viewport sizes: desktop, mobile, tablet.
-
 
 ## External materials used for this project
 
@@ -51,8 +50,7 @@ If particular block of code was copied from the Internet, there is an explicit n
 
 ## Exemplary report
 
-```
-
+```text
 ====================================================================================================
 
   (Run Starting)
@@ -66,7 +64,7 @@ If particular block of code was copied from the Internet, there is an explicit n
 
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                                    
+
   Running:  D4L/A11y.js                                                                     (1 of 2)
 
 
@@ -93,7 +91,7 @@ If particular block of code was copied from the Internet, there is an explicit n
 
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                                    
+
   Running:  D4L/CoronaVaccinationStatistics.js                                              (2 of 2)
 
 
@@ -133,13 +131,13 @@ If particular block of code was copied from the Internet, there is an explicit n
   (Run Finished)
 
 
-       Spec                                              Tests  Passing  Failing  Pending  Skipped  
+       Spec                                              Tests  Passing  Failing  Pending  Skipped
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ ✔  D4L/A11y.js                              00:01        1        1        -        -        - │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
   │ ✔  D4L/CoronaVaccinationStatistics.js       00:12       10       10        -        -        - │
   └────────────────────────────────────────────────────────────────────────────────────────────────┘
-    ✔  All specs passed!                        00:14       11       11        -        -        -  
+    ✔  All specs passed!                        00:14       11       11        -        -        -
 
 
 ```

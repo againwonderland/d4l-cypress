@@ -1,4 +1,4 @@
-/// <reference types="Cypress" /> 
+/// <reference types="Cypress" />
 
 // const { parseInt } = require("cypress/types/lodash");
 const dayjs = require('dayjs');
@@ -10,14 +10,14 @@ Cypress.config('scrollBehavior', 'center')
 
 
 
-describe("Validate Vaccinations statistics for Germany", () => {    
+describe("Validate Vaccinations statistics for Germany", () => {
     beforeEach( function () {
         cy.clearCookies();
         cy.clearLocalStorage();
         cy.visit('/en/vaccine/corona-vaccine/');
         cy.injectAxe();
     })
-    
+
     // Define at the top of the spec file or just import it
     const terminalLog = (violations) => {
         cy.task(
@@ -35,14 +35,14 @@ describe("Validate Vaccinations statistics for Germany", () => {
             nodes: nodes.length
           })
         )
-       
+
         cy.task('table', violationData)
       }
-      
+
 
     it("Vaccinations statistics for Germany doesn't have detectable a11y violations on load", () => {
         cy.checkA11y('section:nth-of-type(3) > .grid', {
             includedImpacts: ['critical']
           }, terminalLog)
-    }); 
-}); 
+    });
+});
